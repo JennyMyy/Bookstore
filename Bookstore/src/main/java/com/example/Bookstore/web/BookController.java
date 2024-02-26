@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.Bookstore.model.Book;
 import com.example.Bookstore.model.BookRepository;
 
+import com.example.Bookstore.model.CategoryRepository;
+
 
 @Controller
 public class BookController {
 
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private CategoryRepository carepository;
 
     @RequestMapping(value = "/booklist", method = RequestMethod.GET)
     public String ShowIndex(Model model) {
