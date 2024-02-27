@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/bootstrap-4.0.0-dist/css/bootstrap.min.css" th:href="@{/bootstrap-4.0.0-dist/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <h1>Categories</h1>
+    <table class="table table-striped">
+        <tbody>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/booklist" class="btn btn-success">Back</a>
+    <a href="/addcategory" class="btn btn-success">Add category</a>
+</body>
+
+</html>
