@@ -26,15 +26,20 @@ public class BookstoreApplication {
 		return (args) -> {
 			log.info("save a couple of books");
 
-			repository.save(new Book("Idän pikajunan arvoitus", "Agatha Christie", 1934, "23567-34632", 14.45));
-			repository.save(new Book("Baskervillen koira", "Arthur Conan Doyle", 1902, "3563423-67", 9.99));
-			repository.save(new Book("Call me by your name", "André Aciman", 2007, "9764532-35", 11.68));
-			repository.save(new Book("Normaaleja ihmisiä", "Sally Rooney", 2018, "8765435-12", 19.99));
-			repository.save(new Book("Katariina", "Sally Salminen", 1936, "534523-34", 15.67));
-		
-			carepository.save(new Category("Detective story"));
-			carepository.save(new Category("Romance"));
-			carepository.save(new Category("Fiction"));
+			Category category1 = new Category("Detective story");
+			Category category2 = new Category("Romance");
+			Category category3 = new Category("Fiction");
+
+			carepository.save(category1);
+			carepository.save(category2);
+			carepository.save(category3);
+
+			repository.save(new Book("Idän pikajunan arvoitus", "Agatha Christie", 1934, "23567-34632", 14.45,category1));
+			repository.save(new Book("Baskervillen koira", "Arthur Conan Doyle", 1902, "3563423-67", 9.99, category1));
+			repository.save(new Book("Call me by your name", "André Aciman", 2007, "9764532-35", 11.68, category2));
+			repository.save(new Book("Normaaleja ihmisiä", "Sally Rooney", 2018, "8765435-12", 19.99, category2));
+			repository.save(new Book("Katariina", "Sally Salminen", 1936, "534523-34", 15.67, category3));
+
 
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {
