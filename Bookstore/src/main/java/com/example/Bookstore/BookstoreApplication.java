@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.example.Bookstore.model.AppUser;
+import com.example.Bookstore.model.AppUserRepository;
 import com.example.Bookstore.model.Book;
 import com.example.Bookstore.model.BookRepository;
 import com.example.Bookstore.model.Category;
@@ -15,7 +17,13 @@ import com.example.Bookstore.model.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
-		private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+
+	private final AppUserRepository urepository;
+
+    public BookstoreApplication(AppUserRepository urepository) {
+        this.urepository = urepository;
+    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -40,6 +48,11 @@ public class BookstoreApplication {
 			repository.save(new Book("Normaaleja ihmisiä", "Sally Rooney", 2018, "8765435-12", 19.99, category2));
 			repository.save(new Book("Katariina", "Sally Salminen", 1936, "534523-34", 15.67, category3));
 
+			// Luodaan käyttäjät user ja admin
+			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {

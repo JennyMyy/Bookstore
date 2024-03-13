@@ -8,7 +8,17 @@
 </head>
 
 <body>
-    <h1>Books</h1>
+    <div class="col-md-4">
+		<h1>Booklist</h1>
+	</div>
+    <div class="col-md-4">
+        <span  sec:authentication="name">Name</span>
+	</div>
+    <div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
     <table class="table table-striped">
         <tbody>
             <tr>
@@ -16,6 +26,7 @@
                 <th>Title</th>
                 <th>ISBN</th>
                 <th>Year</th>
+                <th>Category</th>
             </tr>
             <tr th:each="book : ${books}">
                 <td th:text="${book.author}"></td>
@@ -23,7 +34,7 @@
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.publicationYear}"></td>
                 <td th:text="${book.category.name}"></td>
-                <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Delete</a></td>  
                 <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
             </tr>
         </tbody>
